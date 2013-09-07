@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<!-- 1033 - eng, 1049 - rus -->
+	<Product Id="a7fb09a9-1d0a-426e-bcb2-e066436c63c2" Name="WallpaperChanger" Language="1049"
+		Version="2.5.0" Manufacturer="Vadim Ponomarenko" UpgradeCode="b716469d-1bf8-403a-a270-73cfffb521bd">
+		<Package Description="WallpaperChanger Installer"
+			Comments="vp@null.kiev.ua"
+			Manufacturer="Vadim Ponomarenko" InstallerVersion="200" Compressed="yes" />
+ 
+		<Media Id="1" Cabinet="wallpaperchanger.cab" EmbedCab="yes" />
+ 
+		<Directory Id='TARGETDIR' Name='SourceDir'>
+			<Directory Id='ProgramFilesFolder'>
+				<Directory Id="INSTALLDIR" Name="WallpaperChanger">
+					<Component Id='MainExecutable' Guid="ebdbc61f-02ee-4757-ba1a-8854346b77b8">
+						<File Id="Configurator.exe" Name="Configurator.exe" Source="Configurator.exe" />
+						<File Id="WallpaperChanger.exe" Name="WallpaperChanger.exe" Source="WallpaperChanger.exe" />
+						<File Id="app.ico" Name="app.ico" Source="app.ico" />
+					</Component>
+				</Directory>
+			</Directory>
+			
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ProgramMenuDir" Name="WallpaperChanger">
+					<Component Id='ProgramMenuDir' Guid="0c0a3242-b0e1-4d59-a401-170a21fe34f7">
+						<Shortcut Id="ConfiguratorStartMenuShortcut" Name="WallpaperChanger Configurator"
+							Target="[INSTALLDIR]Configurator.exe" WorkingDirectory="INSTALLDIR"/>
+						<!-- <RegistryValue Root='HKCU' Key='Software\WallpaperChanger'
+							Type='string' Value='' KeyPath='yes' /> -->
+						<!-- Так вроде правильно, этот ключик удаляется при деинсталляции -->
+						<RegistryValue Root="HKCU" Key="Software\Microsoft\WallpaperChanger" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+						<RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id='Complete' Level='1'>
+			<ComponentRef Id='MainExecutable' />
+			<ComponentRef Id='ProgramMenuDir' />
+		</Feature>
+		
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+		<UIRef Id="WixUI_InstallDir" />
+		
+		<Property Id="SCHTASKS">schtasks.exe</Property>
+		<CustomAction Id="TaskInstall" Property="SCHTASKS" ExeCommand="/create /tn WallpaperChanger /tr &quot;\&quot;[INSTALLDIR]WallpaperChanger.exe\&quot;&quot; /sc HOURLY /st 00:00:00" Return="check" />
+		<CustomAction Id="TaskUninstall" Property="SCHTASKS" ExeCommand="/delete /tn WallpaperChanger /f" Return="check" />
+
+		<InstallExecuteSequence>
+			<Custom Action="TaskInstall" After="InstallFinalize">NOT Installed</Custom>
+			<Custom Action="TaskUninstall" After="InstallFinalize">Installed</Custom>
+			<RemoveExistingProducts Before="InstallInitialize" />
+		</InstallExecuteSequence>
+		
+		<Upgrade Id="b716469d-1bf8-403a-a270-73cfffb521bd">
+			<UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+				Minimum='1.0.0' IncludeMinimum='yes'
+				Maximum='2.5.0' IncludeMaximum='no' />
+		</Upgrade>
+		
+		<Icon Id="app.ico" SourceFile="app.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="app.ico" />
+		
+		<Property Id="ALLUSERS">1</Property>
+	</Product>
+</Wix>

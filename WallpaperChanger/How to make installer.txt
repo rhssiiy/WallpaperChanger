@@ -1,0 +1,7 @@
+set PATH=%PATH%;"C:\Program Files (x86)\Windows Installer XML v3.5\bin\"
+candle wallpaperchanger.wxc 
+light -ext WixUIExtension -cultures:ru-RU wallpaperchanger.wixobj 
+
+Для апдейта нужно обновить guid для Product Id и Component Guid.
+Обновить версию в двух AssemblyInfo и в двух местах в wxc.
+UpgradeCode не трогать!

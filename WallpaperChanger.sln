@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WallpaperChanger", "WallpaperChanger\WallpaperChanger.csproj", "{5A54A45B-D431-4833-B7BA-DB316861A715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurator", "Configurator\Configurator.csproj", "{93D0E5D8-9E50-44BA-8D4E-D38FAE707C72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A54A45B-D431-4833-B7BA-DB316861A715}.Debug|x86.ActiveCfg = Debug|x86
+		{5A54A45B-D431-4833-B7BA-DB316861A715}.Debug|x86.Build.0 = Debug|x86
+		{5A54A45B-D431-4833-B7BA-DB316861A715}.Release|x86.ActiveCfg = Release|x86
+		{5A54A45B-D431-4833-B7BA-DB316861A715}.Release|x86.Build.0 = Release|x86
+		{93D0E5D8-9E50-44BA-8D4E-D38FAE707C72}.Debug|x86.ActiveCfg = Debug|x86
+		{93D0E5D8-9E50-44BA-8D4E-D38FAE707C72}.Debug|x86.Build.0 = Debug|x86
+		{93D0E5D8-9E50-44BA-8D4E-D38FAE707C72}.Release|x86.ActiveCfg = Release|x86
+		{93D0E5D8-9E50-44BA-8D4E-D38FAE707C72}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = WallpaperChanger\WallpaperChanger.csproj
+	EndGlobalSection
+EndGlobal
